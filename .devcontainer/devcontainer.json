@@ -42,12 +42,13 @@
           }
         },
         "extensions": [
-          "humao.rest-client",
-          "esbenp.prettier-vscode",
-          "golang.go",
-          "Vue.volar",
-          "rust-lang.rust-analyzer",
-          "ms-python.python"
+            "humao.rest-client",
+            "esbenp.prettier-vscode",
+            "golang.go",
+            "Vue.volar",
+            "rust-lang.rust-analyzer",
+            "ms-python.python",
+            "ms-azuretools.vscode-azureresourcegroups"
         ]
       }
     }
