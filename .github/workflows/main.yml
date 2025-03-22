@@ -19,6 +19,16 @@ jobs:
     - name: Set environment variable
       run: cat outputs.txt
 
+    - name: Set environment variables
+      run: |
+        echo "SUFFIX=$(cat outputs.txt | awk '{print $1}')" >> $GITHUB_ENV
+        echo "RG_NAME=$(cat outputs.txt | awk '{print $2}')" >> $GITHUB_ENV
+
+    - name: Use environment variables
+      run: |
+        echo "Resource Group Name: $RG_NAME"
+        echo "Suffix: $SUFFIX"
+
 
     #- name: Print Deployment Outputs
       #run: |
