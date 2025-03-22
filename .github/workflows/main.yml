@@ -14,7 +14,14 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy-RG
-      run: az deployment sub create --location ${{ vars.LOCATION }} --template-file bicep/resourcegroup.bicep --param location=${{ vars.LOCATION }}
+      run: az deployment sub create --location ${{ vars.LOCATION }} \
+        --template-file bicep/resourcegroup.bicep \
+        --param location=${{ vars.LOCATION }} \
+        --output tsv > outputs.txt
+
+    - name: Set environment variable
+      run: cat outputs.txt
+
 
     #- name: Print Deployment Outputs
       #run: |
