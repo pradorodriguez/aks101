@@ -1,4 +1,4 @@
-name: Deploy Bicep files
+name: Deploy AKS resources
 on: workflow_dispatch
 jobs:
   build-and-deploy:
@@ -14,10 +14,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy-RG
-      run: az deployment sub create --location eastus2 --template-file bicep/resourcegroup.bicep --param location=eastus2 --query "{suffix:properties.outputs.suffix.value, resourceGroupName:properties.outputs.resourceGroupName.value}" --output tsv > outputs.txt
-
-    - name: Set environment variable
-      run: cat outputs.txt
+      run: az deployment sub create --location ${{ vars.LOCATION }} --template-file bicep/resourcegroup.bicep --param location=${{ vars.LOCATION }} --query "{suffix:properties.outputs.suffix.value, resourceGroupName:properties.outputs.resourceGroupName.value}" --output tsv > outputs.txt
 
     - name: Set environment variables
       run: |
@@ -29,8 +26,5 @@ jobs:
         echo "Resource Group Name: $RG_NAME"
         echo "Suffix: $SUFFIX"
 
-
-    #- name: Print Deployment Outputs
-      #run: |
-        #echo "intOutput: ${{ steps.deployment.outputs.intOutput }}"
-        #echo "stringOutput: ${{ steps.deployment.outputs.stringOutput }}"
+    - name: Deploy-RG
+      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX
