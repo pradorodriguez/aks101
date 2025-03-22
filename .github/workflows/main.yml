@@ -13,20 +13,8 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    #- name: Find and Replace - AZURE_CLIENT_ID
-      #run: az deployment sub create --location ${{ vars.LOCATION }} --template-file resourcegroup.bicep --param location=${{ vars.LOCATION }}
-
-    - name: RGDeployment
-      uses: azure/bicep-deploy@v2
-      with:
-        type: deployment
-        operation: create
-        name: RGDeployment
-        location: ${{ vars.LOCATION }}
-        #scope: subscription
-        #subscription-id: 00000000-0000-0000-0000-000000000000
-        template-file: ./bicep/resourcegroup.bicep
-        parameters: 'location=${{ vars.LOCATION }}'
+    - name: Deploy-RG
+      run: az deployment sub create --location ${{ vars.LOCATION }} --template-file resourcegroup.bicep --param location=${{ vars.LOCATION }}
 
     #- name: Print Deployment Outputs
       #run: |
