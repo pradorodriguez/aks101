@@ -15,7 +15,7 @@ param osDiskSizeGB int = 128
 param agentCount int = 1
 
 @description('The size of the Virtual Machine.')
-param agentVMSize string = 'Standard_D2als_v6'
+param agentVMSize string
 
 resource aks 'Microsoft.ContainerService/managedClusters@2024-02-01' = {
   name: clusterName
@@ -43,4 +43,3 @@ resource aks 'Microsoft.ContainerService/managedClusters@2024-02-01' = {
 }
 
 output aksName string = aks.name
-output aksFQDN string = aks.properties.fqdn
