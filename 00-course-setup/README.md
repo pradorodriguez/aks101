@@ -21,18 +21,18 @@ az account set --subscription "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 * Create the Service Principal
 
 ```bash
-az ad sp create-for-rbac --name **yourServicePrincipalName** \
+az ad sp create-for-rbac --name <yourServicePrincipalName> \
                         --role contributor \
-                        --scopes /subscriptions/**yourSubscriptionID** \
+                        --scopes /subscriptions/<yourSubscriptionID> \
                         --sdk-auth
 ```
 
 > [!NOTE]
-> Replace the **yourServicePrincipalName** value with a **name** of your choice.
+> Replace the **< yourServicePrincipalName >** value with a **name** of your choice.
 >
-> Replace the **yourSubscriptionID** value with your Azure **Subscription ID**.
+> Replace the **< yourSubscriptionID >** value with your Azure **Subscription ID**.
 
-** Copy and save all the command output, will be needed to create a GitHub Variable. Output example:
+* Copy and save all the command output, will be needed to create a GitHub Variable. Output example:
 
 ```bash
 {
@@ -59,15 +59,16 @@ az ad sp create-for-rbac --name **yourServicePrincipalName** \
 
 * In your own GitHub fork, go to the **Settings** button in the top menu bar.
 * In the left navigation panel, go to: **Security** -> **Secrets and Variables** -> **Actions**.
+* Click the **Secrets** tab.
 * Create each secret below by clicking the **New repository secret** button.
 
-![Terminal](./images/cs1.jpg)
+![Image](./images/cs1.jpg)
 
-* These are the keys for the secrets: (do not use quotes or blank spaces):
+* These are the keys for the secrets:
 
 | Key/Secret  | Value  |
 | :--- | :--- |
-| AZURE_CREDENTIALS | < _Paste the JSON file generated for the Service Principal_ > |
+| AZURE_CREDENTIALS | < _Paste the JSON output generated for the Service Principal_ > |
 | | |
 
 #### Create GitHub Variables
@@ -77,9 +78,9 @@ az ad sp create-for-rbac --name **yourServicePrincipalName** \
 * Click the **Variables** tab.
 * Create each variable below by clicking the **New repository variable** button.
 
-![Terminal](./images/cs2.jpg)
+![Image](./images/cs2.jpg)
 
-* These are the keys for the secrets: (do not use quotes or blank spaces):
+* These are the keys for the variables: (do not use quotes or blank spaces)
 
 | Key/Variable  | Value  |
 | :--- | :--- |
@@ -91,7 +92,16 @@ az ad sp create-for-rbac --name **yourServicePrincipalName** \
 * In your own GitHub fork, go to the **Actions** button in the top menu bar.
 * In the left navigation panel, click **Deploy AKS resources** -> **Run workflow** -> **Run workflow**.
 
-![Terminal](./images/cs3.jpg)
+![Image](./images/cs3.jpg)
+
+### Check the Azure Resources created in your Azure Account
+
+* A new Azure Resource Group will be created in your Azure Account with the prefix: **rg-aks-xxxxxxxx**.
+* A new AKS will be created in your Azure Account with the prefix: **aks-xxxxxxxx**
+* You can check the exact names of the services in the github workflow logs: click **actions** -> **Deploy AKS resources** -> Select the lastest run named **Deploy AKS resources**.
+* Click **build-and-deploy** -> click the step **Display Azure Resources Name**
+
+![Image](./images/cs4.jpg)
 
 ### Configure your working environment (Select one option)
 
