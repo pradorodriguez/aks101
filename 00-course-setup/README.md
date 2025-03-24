@@ -8,6 +8,7 @@ This page outlines setup steps and technical requirements.
 
 > [!IMPORTANT]
 > **Select and Azure account with sufficient permissions to create resources**
+>
 > **It is recommended to use a personal Azure Account**
 
 * Login to [Azure Shell](https://shell.azure.com/)
@@ -28,6 +29,7 @@ az ad sp create-for-rbac --name **yourServicePrincipalName** \
 
 > [!NOTE]
 > Replace the **yourServicePrincipalName** value with a **name** of your choice.
+>
 > Replace the **yourSubscriptionID** value with your Azure **Subscription ID**.
 
 ** Copy and save all the command output, will be needed to create a GitHub Variable. Output example:
