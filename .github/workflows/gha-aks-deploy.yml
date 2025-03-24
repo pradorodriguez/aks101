@@ -21,9 +21,18 @@ jobs:
         echo "SUFFIX=$(cat output-rg.txt | awk '{print $1}')" >> $GITHUB_ENV
         echo "RG_NAME=$(cat output-rg.txt | awk '{print $2}')" >> $GITHUB_ENV
 
-    - name: Deploy AKS
-      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX  --query "{aksName:properties.outputs.aksName.value}" --output tsv > output-aks.txt
+    - name: Deploy AKS Cluster with Default VM Size
+      env:
+        AGENT_VM_SIZE: ${{ vars.AGENT_VM_SIZE }}
+      if: ${{ env.AGENT_VM_SIZE == '' }}
+      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX --query "{aksName:properties.outputs.aksName.value}" --output tsv > output-aks.txt
 
+    - name: Deploy AKS Cluster with Github Variable VM Size
+      env:
+        AGENT_VM_SIZE: ${{ vars.AGENT_VM_SIZE }}
+      if: ${{ env.AGENT_VM_SIZE != '' }}
+      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX agentVMSize=${{ vars.AGENT_VM_SIZE }} --query "{aksName:properties.outputs.aksName.value}" --output tsv > output-aks.txt
+      
     - name: Set environment variables AKS
       run: echo "AKS_NAME=$(cat output-aks.txt | awk '{print $1}')" >> $GITHUB_ENV
 
