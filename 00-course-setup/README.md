@@ -7,25 +7,25 @@ This page outlines setup steps and technical requirements.
 ### Create a "Service Principal" (SP) with Contributor role in your Azure subscription
 
 > [!IMPORTANT]
-> **Select and Azure account with sufficient permissions to create resources**
+> **Select and Azure account with sufficient permissions to create resources.**
 >
-> **It is recommended to use a personal Azure Account**
+> **It is recommended to use a personal Azure Account.**
 
 * Login to [Azure Shell](https://shell.azure.com/)
 * Select your Azure Subscription ID where the resources will be deployed
 
-'''
+```bash
 az account set --subscription "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-'''
+```
 
 * Create the Service Principal
 
-'''
+```bash
 az ad sp create-for-rbac --name **yourServicePrincipalName** \
                         --role contributor \
                         --scopes /subscriptions/**yourSubscriptionID** \
                         --sdk-auth
-'''
+```
 
 > [!NOTE]
 > Replace the **yourServicePrincipalName** value with a **name** of your choice.
@@ -34,7 +34,7 @@ az ad sp create-for-rbac --name **yourServicePrincipalName** \
 
 ** Copy and save all the command output, will be needed to create a GitHub Variable. Output example:
 
-'''
+```bash
 {
   "clientId": "XXXXXXXXXXXXXXX",
   "clientSecret": "XXXXXXXXXXXXXXX",
@@ -47,7 +47,7 @@ az ad sp create-for-rbac --name **yourServicePrincipalName** \
   "galleryEndpointUrl": "https://gallery.azure.com/",
   "managementEndpointUrl": "https://management.core.windows.net/"
 }
-'''
+```
 
 ### Configure your GitHub repository Fork this Repo
 
