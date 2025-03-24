@@ -13,18 +13,21 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy-RG
-      run: az deployment sub create --location ${{ vars.LOCATION }} --template-file bicep/resourcegroup.bicep --param location=${{ vars.LOCATION }} --query "{suffix:properties.outputs.suffix.value, resourceGroupName:properties.outputs.resourceGroupName.value}" --output tsv > outputs.txt
+    - name: Deploy Resource Group
+      run: az deployment sub create --location ${{ vars.LOCATION }} --template-file bicep/resourcegroup.bicep --param location=${{ vars.LOCATION }} --query "{suffix:properties.outputs.suffix.value, resourceGroupName:properties.outputs.resourceGroupName.value}" --output tsv > output-rg.txt
 
-    - name: Set environment variables
+    - name: Set environment variables Resource Group
       run: |
-        echo "SUFFIX=$(cat outputs.txt | awk '{print $1}')" >> $GITHUB_ENV
-        echo "RG_NAME=$(cat outputs.txt | awk '{print $2}')" >> $GITHUB_ENV
+        echo "SUFFIX=$(cat output-rg.txt | awk '{print $1}')" >> $GITHUB_ENV
+        echo "RG_NAME=$(cat output-rg.txt | awk '{print $2}')" >> $GITHUB_ENV
 
-    - name: Use environment variables
-      run: |
+    - name: Deploy AKS
+      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX  --query "{aksName:properties.outputs.aksName.value}" --output tsv > output-aks.txt
+
+    - name: Set environment variables AKS
+      run: echo "AKS_NAME=$(cat output-aks.txt | awk '{print $1}')" >> $GITHUB_ENV
+
+    - name: Display Azure Resources Name
+      run: |        
         echo "Resource Group Name: $RG_NAME"
-        echo "Suffix: $SUFFIX"
-
-    - name: Deploy-RG
-      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX
+        echo "AKS Name: $AKS_NAME"

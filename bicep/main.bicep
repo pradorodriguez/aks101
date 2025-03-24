@@ -13,11 +13,15 @@ param suffix string
 @description('The name of the Managed Cluster resource.')
 param clusterName string = 'aks-${suffix}'
 
+@description('AKS Workers VM Size')
+param agentVMSize string = 'Standard_D2als_v6'
+
 module aksModule './modules/aks.bicep' = {
   name: 'aksModule'
   params: {
     clusterName: clusterName
     location: location    
+    agentVMSize: agentVMSize
   }
 }
 
