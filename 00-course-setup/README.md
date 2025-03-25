@@ -1,4 +1,4 @@
-# Getting Started with this course
+# Getting Started with this workshop
 
 This page outlines setup steps and technical requirements.
 
@@ -14,13 +14,13 @@ This page outlines setup steps and technical requirements.
 * Login to [Azure Shell](https://shell.azure.com/)
 * Select your Azure Subscription ID where the resources will be deployed
 
-```bash
+```shell
 az account set --subscription "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 ```
 
 * Create the Service Principal
 
-```bash
+```shell
 az ad sp create-for-rbac --name <yourServicePrincipalName> \
                         --role contributor \
                         --scopes /subscriptions/<yourSubscriptionID> \
@@ -34,7 +34,7 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> \
 
 * Copy and save all the command output, will be needed to create a GitHub Variable. Output example:
 
-```bash
+```shell
 {
   "clientId": "XXXXXXXXXXXXXXX",
   "clientSecret": "XXXXXXXXXXXXXXX",
@@ -103,7 +103,7 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> \
 
 ![Image](./images/cs4.jpg)
 
-### Configure your working environment (Select one option)
+### Configure your Lab working environment (Select one option)
 
 #### OPTION 1 - Create a Github Codespaces environment (RECOMMENDED OPTION)
 
