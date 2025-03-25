@@ -44,7 +44,7 @@ kubectl delete pod nginx
 * Deploy a manifest
 
 ```shell
-kubectl create -f pod-definition.yml
+kubectl create -f 10-pod-definition.yml
 ```
 
 * Run separately each command and check the output

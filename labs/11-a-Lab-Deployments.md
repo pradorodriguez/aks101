@@ -1,4 +1,4 @@
-# Lab - Working with Services - Type: Load Balancer
+# Lab - Working with Deployments
 
 ## Prepare the Visual Studio Code terminal
 
@@ -19,18 +19,34 @@ cd labs
 > [!NOTE]
 > If the Azure or AKS authentication fails, go to the "Let's Get Started" section from the  Lab working environment setup instructions.
 
-## Services management
+## Deployment management
 
-* Create a service
+* Create a deployment
 
 ```shell
-kubectl create -f service-nginx-blue-lb.yaml
+kubectl create -f 11-deployment-nginx-blue.yaml
 ```
 
 * Review the created objects
 
 ```shell
-kubectl get svc
+kubectl describe deployment nginxhello-blue
 
-kubectl describe svc nginxhello-blue
+kubectl logs deployment/nginxhello-blue
+
+kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
+```
+
+## Scale the PODs
+
+* Scale the PODs to 5
+
+```shell
+kubectl scale --replicas=5 deployment nginxhello-blue
+```
+
+* Validate the new PODs have been deployed
+
+```shell
+kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
 ```
