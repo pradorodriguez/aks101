@@ -1,4 +1,4 @@
-# Lab - Working with PODs
+# Lab - Working with Deployments
 
 ## Prepare the Visual Studio Code terminal
 
@@ -19,46 +19,34 @@ cd labs
 > [!NOTE]
 > If the Azure or AKS authentication fails, go to the "Let's Get Started" section from the  Lab working environment setup instructions.
 
-## Imperative Interaction
+## Deployment management
 
-* Run separately each command and check the output
+* Create a deployment
 
 ```shell
-kubectl run nginx --image=nginx
-
-kubectl get pods -o wide
-
-kubectl describe pods nginx
-
-kubectl logs nginx 
+kubectl create -f deployment-nginx-blue.yaml
 ```
 
-* Delete objects
+* Review the created objects
 
 ```shell
-kubectl delete pod nginx
+kubectl describe deployment nginxhello-blue
+
+kubectl logs deployment/nginxhello-blue
+
+kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
 ```
 
-## Declarative Interaction
+## Scale the PODs
 
-* Deploy a manifest
+* Scale the PODs to 5
 
 ```shell
-kubectl create -f pod-definition.yml
+kubectl scale --replicas=5 deployment nginxhello-blue
 ```
 
-* Run separately each command and check the output
+* Validate the new PODs have been deployed
 
 ```shell
-kubectl get pod myapp-pod
-
-kubectl get pod myapp-pod -o yaml
-
-kubectl describe pod myapp-pod
-```
-
-* Delete objects
-
-```shell
-kubectl delete pod myapp-pod
+kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
 ```

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxhello-blue
+  labels:
+    app.kubernetes.io/name: nginxhello-blue
+    app.kubernetes.io/part-of: nginxhello-blue
+spec:
+
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nginxhello-blue
+      app.kubernetes.io/part-of: nginxhello-blue
+
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nginxhello-blue
+        app.kubernetes.io/part-of: nginxhello-blue
+    spec:
+      containers:
+      - name: nginxhello-blue
+        image: nbrown/nginxhello:mainline
+        ports:
+        - containerPort: 80
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: COLOR
+          value: blue
