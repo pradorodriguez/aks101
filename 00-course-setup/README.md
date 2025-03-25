@@ -103,7 +103,7 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> \
 
 ![Image](./images/cs4.jpg)
 
-### Configure your working environment (Select one option)
+### Configure your Lab working environment (Select one option)
 
 #### OPTION 1 - Create a Github Codespaces environment (RECOMMENDED OPTION)
 
