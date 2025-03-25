@@ -30,7 +30,13 @@ kubectl create -f 12-service-nginx-blue-lb.yaml
 * Review the created objects
 
 ```shell
-kubectl get svc
-
 kubectl describe svc nginxhello-blue
 ```
+
+* Copy the external IP of the Service from the "EXTERNAL-IP" column
+
+```shell
+kubectl get svc nginxhello-blue
+```
+
+* Open a browser and paste the IP. The application runs on port 80.
