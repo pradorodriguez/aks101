@@ -9,8 +9,26 @@ On the main page of your forked version of this repo, go to: **Code** -> **Codes
 
 ![Dialog showing buttons to create a codespace](./images/cs10.jpg)
 
-### How to run the labs?
-
 ## Let's Get Started
 
-The code and demos are located in the **[./labs folder](../labs/)**
+* Open Visual Studio Code
+* In the upper options, click tab **Terminal** -> click **New Terminal**.
+* Go to the terminal section. Login to your personal Azure tenant:
+
+```shell
+az login
+```
+
+* This will open an Azure Authentication Portal in your browser. Login using the Azure Account where your resources where deployed.
+* Go to the terminal section. Authenticate to your AKS resource:
+
+```shell
+az aks get-credentials --resource-group <Azure-Resource-Group-Name> --name <AKS-Name> --overwrite-existing
+```
+
+> [!NOTE]
+> Replace the **< Azure-Resource-Group-Name >** value with the **Resource Group** name.
+>
+> Replace the **< AKS-Name >** value with the **AKS** name.
+
+* Go the code and demos section are located in the **[./labs folder](../labs/)**

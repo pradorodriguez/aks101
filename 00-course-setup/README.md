@@ -100,6 +100,7 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> \
 * A new AKS will be created in your Azure Account with the prefix: **aks-xxxxxxxx**
 * You can check the exact names of the services in the github workflow logs: click **actions** -> **Deploy AKS resources** -> Select the lastest run named **Deploy AKS resources**.
 * Click **build-and-deploy** -> click the step **Display Azure Resources Name**
+* Copy the Resource Group and AKS name, they will be needed in future labs.
 
 ![Image](./images/cs4.jpg)
 
