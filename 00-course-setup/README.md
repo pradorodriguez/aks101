@@ -11,9 +11,11 @@ This page outlines setup steps and technical requirements.
 ### Tools
 
 * Option 1 (Recommended): **GitHub CodeSpaces – Visual Studio Code**
-  *When selecting this option, DO NOT provision the Azure Resources in the Microsoft Non-Production (fdpo.onmicrosoft.com) tenant.
-* Option 2: **Local PC – Visual Studio Code**
 
+> [!WARNING]
+> When selecting this option, **DO NOT** provision the Azure Resources in the Microsoft Non-Production (fdpo.onmicrosoft.com) tenant.
+
+* Option 2: **Local PC – Visual Studio Code**
 
 ## Setup Steps
 
@@ -121,9 +123,7 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> --role contributor --
 We recommend running this course in a [GitHub Codespaces](https://github.com/features/codespaces) environment. Github Codespaces will automatically open the Visual Studio Code online version, with the cloned repository and ready to execute the code from this workshop.
 
 > [!WARNING]
-> Replace the **< yourServicePrincipalName >** value with a **name** of your choice.
->
-> Replace the **< yourSubscriptionID >** value with your Azure **Subscription ID**.
+> When selecting this option, **DO NOT** provision the Azure Resources in the Microsoft Non-Production (fdpo.onmicrosoft.com) tenant.
 
 If you select this option (CodeSpaces), you can continue the setup instructions **[here](./SETUP_CS.md)**.
 
