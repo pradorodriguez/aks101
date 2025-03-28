@@ -2,6 +2,19 @@
 
 This page outlines setup steps and technical requirements.
 
+## Select your Working Environment
+
+### Azure Subscription
+
+* We recommend selecting a personal Azure Account to avoid restrictions.
+
+### Tools
+
+* Option 1 (Recommended): **GitHub CodeSpaces – Visual Studio Code**
+  *When selecting this option, DO NOT provision the Azure Resources in the Microsoft Non-Production (fdpo.onmicrosoft.com) tenant.
+* Option 2: **Local PC – Visual Studio Code**
+
+
 ## Setup Steps
 
 ### Create a "Service Principal" (SP) with Contributor role in your Azure subscription
@@ -109,6 +122,11 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> \
 #### OPTION 1 - Create a Github Codespaces environment (RECOMMENDED OPTION)
 
 We recommend running this course in a [GitHub Codespaces](https://github.com/features/codespaces) environment. Github Codespaces will automatically open the Visual Studio Code online version, with the cloned repository and ready to execute the code from this workshop.
+
+> [!WARNING]
+> Replace the **< yourServicePrincipalName >** value with a **name** of your choice.
+>
+> Replace the **< yourSubscriptionID >** value with your Azure **Subscription ID**.
 
 If you select this option (CodeSpaces), you can continue the setup instructions **[here](./SETUP_CS.md)**.
 
