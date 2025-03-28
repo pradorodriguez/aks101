@@ -11,9 +11,8 @@ This page outlines setup steps and technical requirements.
 ### Tools
 
 * Option 1 (Recommended): **GitHub CodeSpaces – Visual Studio Code**
-  *When selecting this option, DO NOT provision the Azure Resources in the Microsoft Non-Production (fdpo.onmicrosoft.com) tenant.
+  * When selecting this option, **DO NOT** provision the Azure Resources in the Microsoft Non-Production (fdpo.onmicrosoft.com) tenant.
 * Option 2: **Local PC – Visual Studio Code**
-
 
 ## Setup Steps
 
