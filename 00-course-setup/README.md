@@ -34,10 +34,7 @@ az account set --subscription "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 * Create the Service Principal
 
 ```shell
-az ad sp create-for-rbac --name <yourServicePrincipalName> \
-                        --role contributor \
-                        --scopes /subscriptions/<yourSubscriptionID> \
-                        --sdk-auth
+az ad sp create-for-rbac --name <yourServicePrincipalName> --role contributor --scopes /subscriptions/<yourSubscriptionID> --sdk-auth
 ```
 
 > [!NOTE]
