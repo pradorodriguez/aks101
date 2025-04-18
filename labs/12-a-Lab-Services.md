@@ -7,7 +7,7 @@
   * In case you need to access the AKS environment, run the following command
 
 ```shell
-az aks get-credentials --resource-group <Azure-Resource-Group-Name> --name <AKS-Name> 
+az aks get-credentials --resource-group <Azure-Resource-Group-Name> --name <AKS-Name> --overwrite-existing
 ```
 
 * Set the working environment folder

@@ -1,4 +1,4 @@
-# Lab - Working with Deployments
+# Lab - Working with Deployments and HPA
 
 ## Prepare the Visual Studio Code terminal
 
@@ -21,13 +21,19 @@ cd labs
 
 ## Deployment management
 
+* Delete existing deployment
+
+```shell
+kubectl delete deployment nginxhello-blue
+```
+
 * Create a deployment
 
 ```shell
-kubectl create -f 11-deployment-nginx-blue.yaml
+kubectl create -f 11-deployment-hpa-nginx-blue.yaml
 ```
 
-* Review the created objects
+* Review and count the created objects
 
 ```shell
 kubectl describe deployment nginxhello-blue
@@ -35,18 +41,24 @@ kubectl describe deployment nginxhello-blue
 kubectl logs deployment/nginxhello-blue
 
 kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
+
+kubectl get hpa
+
+kubectl describe hpa hpa-nginxhello-blue
 ```
 
-## Scale the PODs
+## Create the HPA (Horizontal Pod Autoscaler)
 
-* Scale the PODs to 5
+* Create the HPA
 
 ```shell
-kubectl scale --replicas=5 deployment nginxhello-blue
+kubectl create -f 11-hpa-nginx-blue.yaml
 ```
 
-* Validate the new PODs have been deployed
+* Validate the new Replica configuration
 
 ```shell
+kubectl get deployment nginxhello-blue
+
 kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
 ```
