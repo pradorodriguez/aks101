@@ -41,10 +41,6 @@ kubectl describe deployment nginxhello-blue
 kubectl logs deployment/nginxhello-blue
 
 kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
-
-kubectl get hpa
-
-kubectl describe hpa hpa-nginxhello-blue
 ```
 
 ## Create the HPA (Horizontal Pod Autoscaler)
@@ -53,6 +49,14 @@ kubectl describe hpa hpa-nginxhello-blue
 
 ```shell
 kubectl create -f 11-hpa-nginx-blue.yaml
+```
+
+* Review and count the created objects
+
+```shell
+kubectl get hpa
+
+kubectl describe hpa hpa-nginxhello-blue
 ```
 
 * Validate the new Replica configuration
