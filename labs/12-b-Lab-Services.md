@@ -1,4 +1,4 @@
-# Lab - Generate load to the Deployment and verify how HPA works
+# Lab - Working with Services - Type: Load Balancer
 
 ## Prepare the Visual Studio Code terminal
 
@@ -19,25 +19,24 @@ cd labs
 > [!NOTE]
 > If the Azure or AKS authentication fails, go to the "Let's Get Started" section from the  Lab working environment setup instructions.
 
-## Generate load
+## Services management
 
-* Create a POD that will generate load
-
-```shell
-kubectl run apache-bench -i --tty --rm --image=httpd -- ab -n 500000 -c 1000 http://nginxhello-blue.default.svc.cluster.local/ 
-```
-
-> [!NOTE]
-> This step will take some minutes. If you want to interact with AKS and execute commands while this step is executed, then open a new VSC Terminal or go to the AKS in the Azure Portal and check the **Kubernetes resources -> Workloads -> Deployments** section
-
-* Review the created replicas
+* Create a service
 
 ```shell
-kubectl get deployment nginxhello-blue
-
-kubectl get pods --selector app.kubernetes.io/name=nginxhello-blue
-
-kubectl get hpa
-
-kubectl describe hpa hpa-nginxhello-blue
+kubectl create -f 12-service-nginx-blue-lb.yaml
 ```
+
+* Review the created objects
+
+```shell
+kubectl describe svc nginxhello-blue
+```
+
+* Copy the external IP of the Service from the "EXTERNAL-IP" column
+
+```shell
+kubectl get svc nginxhello-blue
+```
+
+* Open a browser and paste the IP. The application runs on port 80.

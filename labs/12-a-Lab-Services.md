@@ -1,4 +1,4 @@
-# Lab - Working with Services - Type: Load Balancer
+# Lab - Working with Services - Types: NodePort and ClusterIP
 
 ## Prepare the Visual Studio Code terminal
 
@@ -21,22 +21,38 @@ cd labs
 
 ## Services management
 
-* Create a service
+* Create a service of type NodePort
 
 ```shell
-kubectl create -f 12-service-nginx-blue-lb.yaml
+kubectl create -f 12-service-nginx-blue-np.yaml
 ```
 
 * Review the created objects
 
 ```shell
-kubectl describe svc nginxhello-blue
+kubectl get svc nginxhello-blue-np
+
+kubectl describe svc nginxhello-blue-np
 ```
 
-* Copy the external IP of the Service from the "EXTERNAL-IP" column
+* Create a service of type ClusterIP
 
 ```shell
-kubectl get svc nginxhello-blue
+kubectl create -f 12-service-nginx-blue-ci.yaml
 ```
 
-* Open a browser and paste the IP. The application runs on port 80.
+* Review the created objects
+
+```shell
+kubectl get svc
+
+kubectl describe svc nginxhello-blue-ci
+```
+
+* Delete the services
+
+```shell
+kubectl delete svc nginxhello-blue-np
+
+kubectl delete svc nginxhello-blue-ci
+```

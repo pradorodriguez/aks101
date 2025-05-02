@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxhello-blue-np
+  labels:
+    app.kubernetes.io/name: nginxhello-blue
+    app.kubernetes.io/part-of: nginxhello-blue
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app.kubernetes.io/name: nginxhello-blue
+    app.kubernetes.io/part-of: nginxhello-blue
