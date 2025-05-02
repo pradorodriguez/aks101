@@ -1,4 +1,4 @@
-# AI Factory
+# AKS 101
 
 ## Session: Kubernetes and AKS Fundamentals
 
