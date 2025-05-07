@@ -1,4 +1,4 @@
-name: Deploy AKS resources
+name: Deploy Azure resources
 on: workflow_dispatch
 jobs:
   build-and-deploy:
@@ -38,13 +38,7 @@ jobs:
         echo "AKS_NAME=$(cat output-aks.txt | awk '{print $1}')" >> $GITHUB_ENV
         echo "ACR_NAME=$(cat output-aks.txt | awk '{print $2}')" >> $GITHUB_ENV
         echo "ACR_LOGIN_SERVER=$(cat output-aks.txt | awk '{print $3}')" >> $GITHUB_ENV
-
-    - name: Set AKS context
-      run: az aks get-credentials --resource-group $RG_NAME --name $AKS_NAME
-
-    - name: Attach ACR to AKS
-      run: az aks update --name $AKS_NAME --resource-group $RG_NAME --attach-acr $ACR_NAME
-
+    
     - name: Display Azure Resources Name
       run: |        
         echo "Resource Group Name: $RG_NAME"
