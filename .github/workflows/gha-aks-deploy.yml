@@ -21,22 +21,33 @@ jobs:
         echo "SUFFIX=$(cat output-rg.txt | awk '{print $1}')" >> $GITHUB_ENV
         echo "RG_NAME=$(cat output-rg.txt | awk '{print $2}')" >> $GITHUB_ENV
 
-    - name: Deploy AKS Cluster with Default VM Size
+    - name: Deploy ACR and AKS Cluster with Default VM Size
       env:
         AGENT_VM_SIZE: ${{ vars.AGENT_VM_SIZE }}
       if: ${{ env.AGENT_VM_SIZE == '' }}
-      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX --query "{aksName:properties.outputs.aksName.value}" --output tsv > output-aks.txt
+      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX --query "{aksName:properties.outputs.aksName.value, acrName:properties.outputs.acrName.value, acrLoginServer:properties.outputs.acrLoginServer.value}" --output tsv > output-aks.txt
 
-    - name: Deploy AKS Cluster with Github Variable VM Size
+    - name: Deploy ACR and AKS Cluster with Github Variable VM Size
       env:
         AGENT_VM_SIZE: ${{ vars.AGENT_VM_SIZE }}
       if: ${{ env.AGENT_VM_SIZE != '' }}
       run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX agentVMSize=${{ vars.AGENT_VM_SIZE }} --query "{aksName:properties.outputs.aksName.value}" --output tsv > output-aks.txt
       
     - name: Set environment variables AKS
-      run: echo "AKS_NAME=$(cat output-aks.txt | awk '{print $1}')" >> $GITHUB_ENV
+      run: |
+        echo "AKS_NAME=$(cat output-aks.txt | awk '{print $1}')" >> $GITHUB_ENV
+        echo "ACR_NAME=$(cat output-aks.txt | awk '{print $2}')" >> $GITHUB_ENV
+        echo "ACR_LOGIN_SERVER=$(cat output-aks.txt | awk '{print $3}')" >> $GITHUB_ENV
+
+    - name: Set AKS context
+      run: az aks get-credentials --resource-group $RG_NAME --name $AKS_NAME
+
+    - name: Attach ACR to AKS
+      run: az aks update --name $AKS_NAME --resource-group $RG_NAME --attach-acr $ACR_NAME
 
     - name: Display Azure Resources Name
       run: |        
         echo "Resource Group Name: $RG_NAME"
         echo "AKS Name: $AKS_NAME"
+        echo "ACR Name: $ACR_NAME"
+        echo "ACR Login Server: $ACR_LOGIN_SERVER"

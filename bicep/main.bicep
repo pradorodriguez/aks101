@@ -32,8 +32,7 @@ module acrModule './modules/acr.bicep' = {
   name: 'acrModule'
   params: {
     acrName: acrName
-    location: location
-    aksPrincipalId: aksModule.outputs.aksIdentityId
+    location: location  
   }
 }
 
