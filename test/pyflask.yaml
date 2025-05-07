@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-python-pod
+  labels:
+    app: docker-python
+spec:
+  containers:
+  - name: docker-python
+    image: acrgptraging1.azurecr.io/docker-python:v1
+    env:
+    - name: VARIABLE
+      value: "Azure World"
+    ports:
+    - containerPort: 5000
