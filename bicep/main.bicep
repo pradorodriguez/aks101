@@ -19,22 +19,24 @@ param clusterName string = 'aks-${suffix}'
 @description('AKS Workers VM Size')
 param agentVMSize string = 'Standard_D2als_v6'
 
-module acrModule './modules/acr.bicep' = {
-  name: 'acrModule'
-  params: {
-    acrName: acrName
-    location: location
-  }
-}
-
 module aksModule './modules/aks.bicep' = {
   name: 'aksModule'
   params: {
     clusterName: clusterName
     location: location    
-    agentVMSize: agentVMSize      
+    agentVMSize: agentVMSize     
   }  
 }
+
+module acrModule './modules/acr.bicep' = {
+  name: 'acrModule'
+  params: {
+    acrName: acrName
+    location: location
+    aksPrincipalId: aksModule.outputs.aksIdentityId
+  }
+}
+
 
 output aksName string = aksModule.outputs.aksName
 output acrName string = acrModule.outputs.acrName

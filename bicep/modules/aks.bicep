@@ -17,6 +17,8 @@ param agentCount int = 1
 @description('The size of the Virtual Machine.')
 param agentVMSize string
 
+@description('The name of the ACR resource.')
+
 resource aks 'Microsoft.ContainerService/managedClusters@2024-02-01' = {
   name: clusterName
   location: location
@@ -42,14 +44,6 @@ resource aks 'Microsoft.ContainerService/managedClusters@2024-02-01' = {
   }
 }
 
-resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(resourceGroup().id, aks.id, 'acrpull')
-  scope: resourceGroup()
-  properties: {
-    principalId: aks.identity.principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
-    principalType: 'ServicePrincipal'
-  }
-}
-
 output aksName string = aks.name
+output aksId string = aks.id
+output aksIdentityId string = aks.identity.principalId
