@@ -45,5 +45,3 @@ resource aks 'Microsoft.ContainerService/managedClusters@2024-02-01' = {
 }
 
 output aksName string = aks.name
-output aksId string = aks.id
-output aksIdentityId string = aks.identity.principalId
