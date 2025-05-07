@@ -1,4 +1,4 @@
-# Lab - Pushing Docker Image to Registry
+# Lab - Push the Docker Image to Azure Container Registry
 
 ## Prepare the Visual Studio Code terminal
 
@@ -27,6 +27,11 @@ cd labs
 ```shell
 az acr login --name <ACR-Name> --resource-group <Azure-Resource-Group-Name>
 ```
+
+> [!IMPORTANT]
+> To get the **ACR-Name** parameter:
+>
+> Azure Portal -> Go to the ACR resource -> Click **Overview** -> Copy the **NAME** (The NAME does not include the domain name **azurecr.io**)
 
 * Rename the Docker Image
 
