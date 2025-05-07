@@ -1,19 +1,20 @@
-FROM python:3.11-slim
+# This command uses the PYTHON image base from Docker Hub
+FROM python:latest
+
+# Create a directory in the container to /app
+RUN mkdir /app
 
 # Specifies the path in the image where files will be copied
 WORKDIR /app
 
-# Install the application dependencies
-RUN pip install flask==2.3
-
 # Copy in the source code
 COPY app /app
 
-# Sets an environment variable that a running container will use
-ENV FLASK_APP=app.py
+# Install the application dependencies
+RUN pip install -r requirements.txt
 
-# Indicates a port the image will expose
+# Indicates the port the image will expose
 EXPOSE 5000
 
 # The command to run the application when the container starts
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD ["python", "/app/main.py"]

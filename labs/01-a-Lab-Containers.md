@@ -58,7 +58,7 @@ http://IP-Address:8080
 * Build a Docker Image
 
 ```shell
-docker build . -t docker-flask:v1
+docker build . -t python-flask:v1
 ```
 
 * List the Docker Images
