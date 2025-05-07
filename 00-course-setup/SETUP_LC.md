@@ -13,6 +13,7 @@ To run the code locally on your computer, you need to have installed the followi
 * [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install)
 * [Ubuntu linux distribution for your WSL](https://ubuntu.com/wsl)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+* [Python](https://www.python.org/downloads/)
 
 ### Clone the repository
 

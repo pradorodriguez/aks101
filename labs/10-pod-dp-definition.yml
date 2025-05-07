@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: docker-python
-    image: acrgptraging1.azurecr.io/docker-python:v1
+    image: <ACR-Login-Server-Domain>/docker-python:v1
     env:
     - name: VARIABLE
       value: "Azure World"
