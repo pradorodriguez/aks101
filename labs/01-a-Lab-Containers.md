@@ -1,4 +1,4 @@
-# Lab - Working with PODs
+# Lab - Working with Docker Containers
 
 ## Prepare the Visual Studio Code terminal
 
@@ -53,12 +53,12 @@ http://IP-Address:8080
 
 * View the [Dockerfile document](./Dockerfile)
 
-* View the [Application code](./app/app.py)
+* View the [Application code](./app/main.py)
 
 * Build a Docker Image
 
 ```shell
-docker build . -t python-flask:v1
+docker build . -t docker-python:v1
 ```
 
 * List the Docker Images
@@ -70,7 +70,7 @@ docker image ls
 * Run a Docker Container
 
 ```shell
-docker container run -d -p 8081:5000 docker-flask:v1
+docker run -p 5001:5000 -d docker-python:v1
 ```
 
 * View the container
@@ -84,21 +84,21 @@ docker ps
   * If using **LOCAL** Visual Studio: Open a browser and paste **<http://localhost:PORT-NUMBER>**
 
 ```shell
-http://IP-Address:8081
+http://IP-Address:5001
 ```
 
-## Stop the containers
+## Stop the pengbai/docker-supermario container
 
-* Get the **Containers IDs**
+* Get the **Container pengbai/docker-supermario ID**
 
 ```shell
 docker ps
 ```
 
-* Stop both containers
+* Stop pengbai/docker-supermario container
 
 ```shell
-docker stop <Container-ID>
+docker stop <Container-pengbai/docker-supermario-ID>
 ```
 
 ## Useful Docker commands

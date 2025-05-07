@@ -6,7 +6,7 @@ This page outlines setup steps and technical requirements.
 
 ### Azure Subscription
 
-* We recommend selecting a personal Azure Account to avoid restrictions.
+* We recommend selecting a [personal Azure Account](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account) to avoid restrictions.
 
 ### Tools
 
