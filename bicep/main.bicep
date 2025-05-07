@@ -10,6 +10,9 @@ param location string
 
 param suffix string
 
+@description('The name of the ACR resource.')
+param acrName string = 'acr${suffix}'
+
 @description('The name of the Managed Cluster resource.')
 param clusterName string = 'aks-${suffix}'
 
@@ -21,8 +24,19 @@ module aksModule './modules/aks.bicep' = {
   params: {
     clusterName: clusterName
     location: location    
-    agentVMSize: agentVMSize
+    agentVMSize: agentVMSize     
+  }  
+}
+
+module acrModule './modules/acr.bicep' = {
+  name: 'acrModule'
+  params: {
+    acrName: acrName
+    location: location  
   }
 }
 
+
 output aksName string = aksModule.outputs.aksName
+output acrName string = acrModule.outputs.acrName
+output acrLoginServer string = acrModule.outputs.acrLoginServer

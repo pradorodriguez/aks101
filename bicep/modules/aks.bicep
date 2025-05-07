@@ -17,6 +17,8 @@ param agentCount int = 1
 @description('The size of the Virtual Machine.')
 param agentVMSize string
 
+@description('The name of the ACR resource.')
+
 resource aks 'Microsoft.ContainerService/managedClusters@2024-02-01' = {
   name: clusterName
   location: location
