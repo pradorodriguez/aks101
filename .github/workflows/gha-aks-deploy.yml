@@ -31,7 +31,7 @@ jobs:
       env:
         AGENT_VM_SIZE: ${{ vars.AGENT_VM_SIZE }}
       if: ${{ env.AGENT_VM_SIZE != '' }}
-      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX agentVMSize=${{ vars.AGENT_VM_SIZE }} --query "{aksName:properties.outputs.aksName.value}" --output tsv > output-aks.txt
+      run: az deployment group create --resource-group $RG_NAME --template-file bicep/main.bicep --parameters location=${{ vars.LOCATION }} suffix=$SUFFIX agentVMSize=${{ vars.AGENT_VM_SIZE }} --query "{aksName:properties.outputs.aksName.value, acrName:properties.outputs.acrName.value, acrLoginServer:properties.outputs.acrLoginServer.value}" --output tsv > output-aks.txt
       
     - name: Set environment variables AKS
       run: |
