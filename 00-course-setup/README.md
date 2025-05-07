@@ -102,7 +102,7 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> --role contributor --
 ### Run the GitHub Action workflow to deploy the Azure Environment
 
 * In your own GitHub fork, go to the **Actions** button in the top menu bar.
-* In the left navigation panel, click **Deploy AKS resources** -> **Run workflow** -> **Run workflow**.
+* In the left navigation panel, click **Deploy Azure resources** -> **Run workflow** -> **Run workflow**.
 
 ![Image](./images/cs3.jpg)
 
@@ -110,9 +110,10 @@ az ad sp create-for-rbac --name <yourServicePrincipalName> --role contributor --
 
 * A new Azure Resource Group will be created in your Azure Account with the prefix: **rg-aks-xxxxxxxx**.
 * A new AKS will be created in your Azure Account with the prefix: **aks-xxxxxxxx**
-* You can check the exact names of the services in the github workflow logs: click **actions** -> **Deploy AKS resources** -> Select the lastest run named **Deploy AKS resources**.
+* A new ACR will be created in your Azure Account with the prefix: **acrxxxxxxxx**
+* You can check the exact names of the services in the github workflow logs: click **actions** -> **Deploy Azure resources** -> Select the lastest run named **Deploy Azure resources**.
 * Click **build-and-deploy** -> click the step **Display Azure Resources Name**
-* Copy the Resource Group and AKS name, they will be needed in future labs.
+* Copy **ALL** the variable names, they will be needed in future labs.
 
 ![Image](./images/cs4.jpg)
 
